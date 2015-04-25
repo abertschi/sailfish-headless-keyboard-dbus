@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=headless-keyboard
+Exec=headless-keyboard
+Name=HL Keyboard
+# translation example:
+# your app name in German locale (de)
+# Name[de]=headless-keyboard
+

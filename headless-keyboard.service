@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=harbour.headlesskeyboard.Service
+Exec=/usr/bin/invoker --type=generic -s /usr/bin/headless-keyboard.py
+User=nemo

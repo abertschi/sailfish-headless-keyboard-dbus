@@ -10,5 +10,4 @@
 
 * Sat Apr 11 2015 Andrin Bertschi <andrin.bertschi@gmail.com> 0.1
 - Initial version
-- supporting key-commands 'insert_text', 'set_label', 'key_return' and 'enable_debug'
 

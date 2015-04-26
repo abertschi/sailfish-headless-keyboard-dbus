@@ -24,10 +24,26 @@ OTHER_FILES += qml/headless-keyboard.qml \
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/headless-keyboard-de.ts
 
+#QMAKE_INSTALL_FILE = install -m 6755 -p -o root -g root
+QMAKE_INSTALL_PROGRAM = install -m 6755 -p -o root -g root
 
 keyboard.files += ../custom_headless_keyboard.qml
 keyboard.files += ../§custom_headless_keyboard.conf
 keyboard.path = /usr/share/maliit/plugins/com/jolla/layouts
 
+# dbus service
+service.files += ../headless-keyboard.service
+service.path = /usr/share/dbus-1/services/
+
+
+unix {
+    dbus_server.path = /usr/bin/
+    dbus_server.files += ../headless_keyboard.py
+    INSTALLS += dbus_server
+}
+
+
+
 INSTALLS += keyboard
+INSTALLS += service
 

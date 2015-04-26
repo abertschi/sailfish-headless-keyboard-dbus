@@ -25,8 +25,6 @@ PkgConfigBR:
   - Qt5Core
   - Qt5Qml
   - Qt5Quick
-  - pygobject2
-  - dbus-python
 
 # Build dependencies without a pkgconfig setup can be listed here
 # PkgBR:
@@ -34,7 +32,9 @@ PkgConfigBR:
 
 # Runtime dependencies which are not automatically detected
 Requires:
-  - sailfishsilica-qt5 >= 0.10.9 
+  - sailfishsilica-qt5 >= 0.10.9
+  - pygobject2
+  - dbus-python
 
 # All installed files
 Files:
@@ -42,7 +42,8 @@ Files:
   - '%{_datadir}/%{name}'
   - '%{_datadir}/applications/%{name}.desktop'
   - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
-  - '/usr/share/maliit/plugins/com/jolla/layouts'
+  - '%{_datadir}/maliit/plugins/com/jolla/layouts'
+  - '%{_datadir}/dbus-1/services'
 
 # For more information about yaml and what's supported in Sailfish OS
 # build system, please see https://wiki.merproject.org/wiki/Spectacle

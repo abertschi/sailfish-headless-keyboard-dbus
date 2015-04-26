@@ -1,17 +1,17 @@
 // The MIT License (MIT)
-// 
+//
 // Copyright (c) 2015 Andrin Bertschi
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,6 +23,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
+import org.nemomobile.dbus 2.0
+import com.meego.maliitquick 1.0
+import com.jolla.keyboard 1.0
 import ".."
 
 KeyboardLayout {
@@ -37,110 +40,96 @@ KeyboardLayout {
         EnterKey {}
     }
 
-    Connections {
-        target: Clipboard
-        onTextChanged: {
-            debug('new text for clipboard')
+    DBusInterface {
+        id: dbusServer
+        service: 'ch.abertschi.keyboard.headless'
+        iface: 'ch.abertschi.keyboard.headless.Server'
+        path: "/"
+        signalsEnabled: true
 
-            var text = Clipboard.text
-
-            if (text == null || text == '') {
-                return
-            }
-
-            // debug
-            //text = '{ "cmds": [{ "cmd": "set_label", "arg": "this is a label"}]}'
-            //text = '{ "cmd": "insert_text", "arg": "a"}'
-
-            var command
-            try {
-                command = JSON.parse(text)
-            } catch (e) {
-                command = null
-            }
-
-            if (command == null) {
-                return
-            }
-
-            if (command.cmd != 'undefined' && command.cmd != null) {
-                evalCmd(command.cmd, command.arg)
-            }
-
-            if (command.cmds != 'undefined' && command.cmds != null) {
-                for (var i = 0; i < command.cmds.length; i++) {
-                    var cmd = command.cmds[i]
-                    evalCmd(cmd.cmd, cmd.arg)
-                }
-            }
+        function receive_key_return() {
+            debug("receive_key_return")
+            MInputMethodQuick.sendKey(Qt.Key_Return, 0, "", Maliit.KeyClick)
         }
-    }
 
-    function evalCmd(cmd, msg) {
-        var ret = processCmd(cmd, msg)
-        if (ret != -1) {
 
-            // overwriting the clipboard afterwards seems to crash it
-            //Clipboard.text = ''
+        function receive_key_del() {
+            debug("receive_key_del")
+            MInputMethodQuick.sendKey(Qt.Key_Backspace, 0, "\b", Maliit.KeyClick)
         }
-    }
 
-    // returns -1 if unknown command 'cmd' was given
-    function processCmd(cmd, msg) {
-        debug('processing cmd and msg(' + cmd + ',' + msg + ')')
+        function receive_key_arrow(direction) {
+            debug("receive_key_arrow: " + direction)
 
-        switch (cmd) {
-            case 'set_label':
-                saveSetting('label', msg)
-                spacebar.languageLabel = msg
+            switch(direction) {
+            case "up":
+                MInputMethodQuick.sendKey(Qt.Key_Up, 0, "", Maliit.KeyClick)
+                break
+            case "down":
+                MInputMethodQuick.sendKey(Qt.Key_Down, 0, "", Maliit.KeyClick)
+                break
+            case "left":
+                MInputMethodQuick.sendKey(Qt.Key_Left, 0, "", Maliit.KeyClick)
+                break
+            case "right":
+                MInputMethodQuick.sendKey(Qt.Key_Right, 0, "", Maliit.KeyClick)
                 break;
-
-            case 'insert_text':
-                MInputMethodQuick.sendCommit(msg)
-                break;
-
-            case 'key_backspace':
-                MInputMethodQuick.sendCommit('todo')
-                break;
-
-            case 'key_return':
-                MInputMethodQuick.sendCommit("\n")
-                break;
-
-            case 'key_arrow_left':
-                MInputMethodQuick.sendCommit("todo")
-                break;
-
-            case 'key_arrow_right':
-                MInputMethodQuick.sendCommit("todo")
-                break;
-
-            case 'enable_debug':
-                var key = "enable_debug"
-                if (msg || msg == 1 || msg == "true") {
-                    saveSetting(key, 1)
-                    enableDebug = true
-                }else {
-                    saveSetting(key, 0)
-                    enableDebug = false
-                }
-                break;
-
             default:
-                debug('unknown command: (' + cmd + ',' + msg + ')')
-                return -1
+                break;
+            }
         }
-        return 0
+
+        function receive_keyboard_label(text) {
+            debug("receive_keyboard_label " + text)
+            saveSetting('label', text)
+            spacebar.languageLabel = text
+        }
+
+        function receive_text(text) {
+            debug("receive_text " + text)
+            MInputMethodQuick.sendCommit(text)
+        }
+
+        function receive_enable_debug(enable) {
+            var key = "enable_debug"
+            if (enable) {
+                saveSetting(key, 1)
+                enableDebug = true
+            }else {
+                saveSetting(key, 0)
+                enableDebug = false
+            }
+        }
+
+        function receive_enable_keyboard() {
+            debug("receive_enable_keyboard ")
+        }
     }
+
+    //debugging
+    /*Timer {
+        id: timer
+        running: true
+        repeat: true
+        interval: 1000
+        onTriggered: {
+            debug('timer triggered')
+            enableDebug = true
+            dbusServer.call("send_text", [" hi there this is text"]);
+        }
+        Component.onCompleted: timer.start()
+    } */
+
 
     function debug(msg) {
+        console.log(msg)
         if (enableDebug)
             MInputMethodQuick.sendCommit('- ' + msg + '\r')
     }
 
     function openDB() {
         if (db !== null) return;
-        db = LocalStorage.openDatabaseSync("headless-keyboard", "0.1", "headless keyboard layout", 100000);
+        db = LocalStorage.openDatabaseSync("headless-keyboard-dbus", "0.1", "headless keyboard layout", 100000);
         try {
             db.transaction(function(tx) {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS settings(key TEXT UNIQUE, value TEXT)');

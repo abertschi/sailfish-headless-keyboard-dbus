@@ -21,6 +21,8 @@ URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  headless-keyboard.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
+Requires:   pygobject2
+Requires:   dbus-python
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -55,6 +57,7 @@ rm -rf %{buildroot}
 %qmake5_install
 
 # >> install post
+
 # << install post
 
 desktop-file-install --delete-original       \
@@ -62,12 +65,15 @@ desktop-file-install --delete-original       \
    %{buildroot}%{_datadir}/applications/*.desktop
 
 %files
-%defattr(-,root,root,-)
+%defattr(755,root,root,-)
 %{_bindir}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
-/usr/share/maliit/plugins/com/jolla/layouts
-
+%{_datadir}/maliit/plugins/com/jolla/layouts
+%{_datadir}/dbus-1/services
 # >> files
 # << files
+
+%post
+chmod 755 /usr/bin/headless_keyboard.py

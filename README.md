@@ -8,7 +8,7 @@ sailfish os. It aims to enable applications to insert any text into a
 currently focused widget on the screen.
 
 ## Installation
-- This project is still in development
+- https://openrepos.net/content/abertschi/headless-keyboard
 
 
 ## Projects that use headless-wlan-keyboard

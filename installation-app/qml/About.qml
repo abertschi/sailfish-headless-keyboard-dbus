@@ -104,8 +104,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 onClicked: {
-                    Qt.openUrlExternally("http://www.abertschi.ch");
-                    console.log('open url')
+                    Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VYXMGXRV7QPW2");
                 }
             }
 

@@ -72,7 +72,6 @@ Item {
         function receive_text(text) {
             debug("receive_text " + text)
             MInputMethodQuick.sendCommit(text)
-            //spacebar.languageLabel = text
         }
 
         function receive_enable_debug(enable) {
@@ -95,21 +94,19 @@ Item {
     }
 
     //debugging
-    Timer {
-        id: timer
-        running: true
-        repeat: true
-        interval: 1000
-        onTriggered: {
-            debug('timer triggered')
-            enableDebug = false
-            //dbusServer.call("send_text", [" hi there this is text"]);
+    // Timer {
+    //     id: timer
+    //     running: true
+    //     repeat: true
+    //     interval: 1000
+    //     onTriggered: {
+    //         debug('timer triggered')
+    //         enableDebug = false
 
-            //MInputMethodQuick.sendCommit(".")
-        }
-        Component.onCompleted: timer.start()
-    }
-
+    //         //MInputMethodQuick.sendCommit(".")
+    //     }
+    //     Component.onCompleted: timer.start()
+    // }
 
     function debug(msg) {
         console.log(msg)

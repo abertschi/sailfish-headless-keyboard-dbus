@@ -73,7 +73,6 @@ class HeadlessKeyboardServer(dbus.service.Object):
     def receive_clipboard_changed(self, content):
         pass
 
-
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     session_bus = dbus.SessionBus()

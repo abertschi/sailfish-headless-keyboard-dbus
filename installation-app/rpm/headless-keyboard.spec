@@ -32,7 +32,6 @@ BuildRequires:  desktop-file-utils
 %description
 Short description of my SailfishOS Application
 
-
 %prep
 %setup -q -n %{name}-%{version}
 
@@ -51,7 +50,10 @@ Short description of my SailfishOS Application
 # << build post
 
 %install
-rm -rf %{buildroot}
+ls %{buildroot}
+
+#rm -rf %{buildroot}
+
 # >> install pre
 # << install pre
 %qmake5_install
@@ -70,10 +72,15 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
-%{_datadir}/maliit/plugins/com/jolla/layouts
+%{_datadir}/maliit/plugins/com/jolla/custom_headless
+%{_datadir}/maliit/plugins/com/jolla
 %{_datadir}/dbus-1/services
 # >> files
 # << files
 
 %post
 chmod 755 /usr/bin/headless_keyboard.py
+patch -p0 < /usr/share/maliit/plugins/com/jolla/custom_headless/KeyboardBase.patch
+
+%preun
+patch -R -p0 < /usr/share/maliit/plugins/com/jolla/custom_headless/KeyboardBase.patch

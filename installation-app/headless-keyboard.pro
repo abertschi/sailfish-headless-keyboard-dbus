@@ -13,10 +13,9 @@ OTHER_FILES += qml/headless-keyboard.qml \
     translations/*.ts \
     headless-keyboard.big.png \
     headless-keyboard.desktop \
-    ../custom_headless_keyboard.qml \
-    ../§custom_headless_keyboard.conf \
     ../headless-keyboard.service \
-    ../headless_keyboard.py
+    ../headless_keyboard.py \
+    ../HeadlessKeyboard.qml
 
 
 # to disable building translations every time, comment out the
@@ -27,9 +26,9 @@ TRANSLATIONS += translations/headless-keyboard-de.ts
 #QMAKE_INSTALL_FILE = install -m 6755 -p -o root -g root
 QMAKE_INSTALL_PROGRAM = install -m 6755 -p -o root -g root
 
-keyboard.files += ../custom_headless_keyboard.qml
-keyboard.files += ../§custom_headless_keyboard.conf
-keyboard.path = /usr/share/maliit/plugins/com/jolla/layouts
+keyboard.files += ../HeadlessKeyboard.qml
+keyboard.files += ../KeyboardBase.patch
+keyboard.path = /usr/share/maliit/plugins/com/jolla/custom_headless
 
 # dbus service
 service.files += ../headless-keyboard.service
@@ -42,8 +41,7 @@ unix {
     INSTALLS += dbus_server
 }
 
-
-
 INSTALLS += keyboard
 INSTALLS += service
+
 

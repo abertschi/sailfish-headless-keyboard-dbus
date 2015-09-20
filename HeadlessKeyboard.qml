@@ -26,7 +26,7 @@ import QtQuick.LocalStorage 2.0
 import org.nemomobile.dbus 2.0
 import com.meego.maliitquick 1.0
 import com.jolla.keyboard 1.0
-import "."
+import "../"
 
 Item {
     property var db: null
@@ -109,9 +109,10 @@ Item {
     // }
 
     function debug(msg) {
-        console.log(msg)
-        if (enableDebug || true)
-            MInputMethodQuick.sendCommit('- ' + msg + '\r')
+        if (enableDebug) {
+            console.log(msg)
+            MInputMethodQuick.sendCommit('\rdebug: ' + msg + '\r')
+        }
     }
 
     function openDB() {

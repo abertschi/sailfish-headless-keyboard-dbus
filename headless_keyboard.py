@@ -12,7 +12,7 @@ class HeadlessKeyboardServer(dbus.service.Object):
 
     @dbus.service.method("ch.abertschi.keyboard.headless.Server", in_signature='s', out_signature='')
     def send_text(self, text):
-        print("keyboardlayout: send_text" + text)
+        print("keyboardlayout: send_text is called")
         self.receive_text(text) # text.decode('utf-8', 'ignore')
 
     @dbus.service.method("ch.abertschi.keyboard.headless.Server", in_signature='', out_signature='')
@@ -50,7 +50,7 @@ class HeadlessKeyboardServer(dbus.service.Object):
 
     @dbus.service.signal("ch.abertschi.keyboard.headless.Server")
     def receive_text(self, text):
-        print("keyboardlayout: receive_text %s" % text)
+        print("keyboardlayout: receive_text")
         pass
 
     @dbus.service.signal("ch.abertschi.keyboard.headless.Server")

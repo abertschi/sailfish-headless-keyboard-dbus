@@ -89,7 +89,9 @@ Item {
     Connections {
         target: Clipboard
         onTextChanged: {
-            dbusServer.call("send_clipboard_set", [Clipboard.text]);
+            if (Clipboard.hasText) {
+                dbusServer.call("send_clipboard_set", [Clipboard.text]);
+            }
         }
     }
 

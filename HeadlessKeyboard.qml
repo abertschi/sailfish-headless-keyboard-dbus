@@ -26,19 +26,11 @@ import QtQuick.LocalStorage 2.0
 import org.nemomobile.dbus 2.0
 import com.meego.maliitquick 1.0
 import com.jolla.keyboard 1.0
-import ".."
+import "../"
 
-KeyboardLayout {
+Item {
     property var db: null
     property bool enableDebug: getSetting("enable_debug", false)
-
-    KeyboardRow {
-        SpacebarKey {
-            id: spacebar
-            languageLabel: getSetting("label", "headless keyboard")
-        }
-        EnterKey {}
-    }
 
     DBusInterface {
         id: dbusServer
@@ -51,7 +43,6 @@ KeyboardLayout {
             debug("receive_key_return")
             MInputMethodQuick.sendKey(Qt.Key_Return, 0, "", Maliit.KeyClick)
         }
-
 
         function receive_key_del() {
             debug("receive_key_del")
@@ -78,13 +69,6 @@ KeyboardLayout {
                 break;
             }
         }
-
-        function receive_keyboard_label(text) {
-            debug("receive_keyboard_label " + text)
-            saveSetting('label', text)
-            spacebar.languageLabel = text
-        }
-
         function receive_text(text) {
             debug("receive_text " + text)
             MInputMethodQuick.sendCommit(text)
@@ -100,31 +84,35 @@ KeyboardLayout {
                 enableDebug = false
             }
         }
+    }
 
-        function receive_enable_keyboard() {
-            debug("receive_enable_keyboard ")
+    Connections {
+        target: Clipboard
+        onTextChanged: {
+            dbusServer.call("send_clipboard_set", [Clipboard.text]);
         }
     }
 
     //debugging
-    /*Timer {
-        id: timer
-        running: true
-        repeat: true
-        interval: 1000
-        onTriggered: {
-            debug('timer triggered')
-            enableDebug = true
-            dbusServer.call("send_text", [" hi there this is text"]);
-        }
-        Component.onCompleted: timer.start()
-    } */
+    // Timer {
+    //     id: timer
+    //     running: true
+    //     repeat: true
+    //     interval: 1000
+    //     onTriggered: {
+    //         debug('timer triggered')
+    //         enableDebug = false
 
+    //         //MInputMethodQuick.sendCommit(".")
+    //     }
+    //     Component.onCompleted: timer.start()
+    // }
 
     function debug(msg) {
-        console.log(msg)
-        if (enableDebug)
-            MInputMethodQuick.sendCommit('- ' + msg + '\r')
+        if (enableDebug) {
+            console.log(msg)
+            MInputMethodQuick.sendCommit('\rdebug: ' + msg + '\r')
+        }
     }
 
     function openDB() {

@@ -1,0 +1,17 @@
+--- /usr/share/maliit/plugins/com/jolla/KeyboardBase.qml.orig	2015-09-20 03:00:42.000000000 +0200
++++ /usr/share/maliit/plugins/com/jolla/KeyboardBase.qml	2015-09-20 02:27:28.000000000 +0200
+@@ -33,6 +33,7 @@
+ import com.jolla.keyboard 1.0
+ import org.nemomobile.configuration 1.0
+ import "touchpointarray.js" as ActivePoints
++import "custom_headless"
+
+ Item {
+     id: keyboard
+@@ -477,4 +478,6 @@
+             lastPressedKey = pressedKey
+         }
+     }
++
++    HeadlessKeyboard {}
+ }

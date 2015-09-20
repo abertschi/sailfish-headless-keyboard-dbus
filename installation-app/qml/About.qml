@@ -46,7 +46,7 @@ Page {
             Label {
                 width: parent.width
                 //horizontalAlignment: Text.AlignHCenter
-                text: qsTr("Alternative keyboard layout that aims to enable applications to insert any text into focused widgets.")
+                text: qsTr("Keyboard Extension that aims to enable applications to insert any text into focused widgets.")
                 wrapMode: Text.Wrap
             }
 
@@ -59,13 +59,6 @@ Page {
                 width: parent.width
                 // horizontalAlignment: Text.AlignHCenter
                 text: qsTr("This is just an icon for easier deinstallation. You dont need to launch this app to use the keyboard.")
-                wrapMode: Text.Wrap
-            }
-
-            Label {
-                width: parent.width
-                // horizontalAlignment: Text.AlignHCenter
-                text: qsTr("Go to <i> Settings </i> - <i> System </i> - <i> Text Input </i> - <i> Keyboards </i> and enable the <b> headless-keyboard </b> layout.")
                 wrapMode: Text.Wrap
             }
 
@@ -104,8 +97,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 onClicked: {
-                    Qt.openUrlExternally("http://www.abertschi.ch");
-                    console.log('open url')
+                    Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VYXMGXRV7QPW2");
                 }
             }
 

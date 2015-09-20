@@ -8,15 +8,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alternative keyboard layout that aims to enable applications to insert any text into focused widgets.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This is just an icon for easier deinstallation. You dont need to launch this app to use the keyboard.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to &lt;i&gt; Settings &lt;/i&gt; - &lt;i&gt; System &lt;/i&gt; - &lt;i&gt; Text Input &lt;/i&gt; - &lt;i&gt; Keyboards &lt;/i&gt; and enable the &lt;b&gt; headless-keyboard &lt;/b&gt; layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -29,6 +21,10 @@
     </message>
     <message>
         <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keyboard Extension that aims to enable applications to insert any text into focused widgets.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -11,3 +11,7 @@
 * Sat Apr 11 2015 Andrin Bertschi <andrin.bertschi@gmail.com> 0.1
 - Initial version
 
+* Sat Apr 11 2015 Andrin Bertschi <andrin.bertschi@gmail.com> 0.2
+- No additional keyboard layout is necessary anymore
+- Patch applies headless keyboard to all available keyboard layouts
+

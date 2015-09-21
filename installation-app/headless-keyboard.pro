@@ -34,14 +34,16 @@ keyboard.path = /usr/share/maliit/plugins/com/jolla/custom_headless
 service.files += ../headless-keyboard.service
 service.path = /usr/share/dbus-1/services/
 
+dbus_server.path = /usr/bin/
+dbus_server.files += ../headless_keyboard.py
 
-unix {
-    dbus_server.path = /usr/bin/
-    dbus_server.files += ../headless_keyboard.py
-    INSTALLS += dbus_server
-}
-
+INSTALLS += dbus_server
 INSTALLS += keyboard
 INSTALLS += service
+
+unix {
+    # get rid of mac osx DS_Store files
+    system(find $$PWD -name ".DS_Store" -depth -exec rm {} \;)
+}
 
 

@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 ApplicationWindow
 {
     id: root
-    property string version: "v0.2"
+    property string version: "v0.3"
     initialPage: Component { About { } }
     cover: Qt.resolvedUrl("Cover.qml")
 }

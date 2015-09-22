@@ -11,7 +11,9 @@
 * Sat Apr 11 2015 Andrin Bertschi <andrin.bertschi@gmail.com> 0.1
 - Initial version
 
-* Sat Apr 11 2015 Andrin Bertschi <andrin.bertschi@gmail.com> 0.2
+* Mon Sep 21 2015 Andrin Bertschi <andrin.bertschi@gmail.com> 0.2
 - No additional keyboard layout is necessary anymore
 - Patch applies headless keyboard to all available keyboard layouts
 
+* Tue Sep 22 2015 Andrin Bertschi <andrin.bertschi@gmail.com> 0.3
+- Add more information how to activate extension

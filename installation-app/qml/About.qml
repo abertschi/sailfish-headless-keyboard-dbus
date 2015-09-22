@@ -45,7 +45,6 @@ Page {
 
             Label {
                 width: parent.width
-                //horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Keyboard Extension that aims to enable applications to insert any text into focused widgets.")
                 wrapMode: Text.Wrap
             }
@@ -68,7 +67,6 @@ Page {
             }
             Label {
                 width: parent.width
-                // horizontalAlignment: Text.AlignHCenter
                 text: qsTr("This is just an icon for easier deinstallation. You dont need to launch this app to use the keyboard.")
                 wrapMode: Text.Wrap
             }
@@ -80,7 +78,17 @@ Page {
 
             Label {
                 width: parent.width
-                //horizontalAlignment: Text.AlignHCenter
+                text: qsTr("After a system update, this app may need to be reinstalled in order to continue working.")
+                wrapMode: Text.Wrap
+            }
+
+            Separator {
+                width:parent.width;
+                color: Theme.highlightColor
+            }
+
+            Label {
+                width: parent.width
                 text: qsTr("This is Free and OpenSource Software that respects your privacy. Dig into the code on <a href='https://github.com/abertschi/sailfish-headless-keyboard-layout'>Github </a>.")
                 wrapMode: Text.Wrap
                 MouseArea {

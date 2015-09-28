@@ -82,5 +82,10 @@ desktop-file-install --delete-original       \
 chmod 755 /usr/bin/headless_keyboard.py
 patch -p0 < /usr/share/maliit/plugins/com/jolla/custom_headless/KeyboardBase.patch
 
+systemctl-user restart maliit-server
+
 %preun
 patch -R -p0 < /usr/share/maliit/plugins/com/jolla/custom_headless/KeyboardBase.patch
+
+%postun
+systemctl-user restart maliit-server

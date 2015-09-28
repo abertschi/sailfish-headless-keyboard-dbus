@@ -49,16 +49,16 @@ Page {
                 wrapMode: Text.Wrap
             }
 
-            Separator {
-                width:parent.width;
-                color: Theme.highlightColor
-            }
+//            Separator {
+//                width:parent.width;
+//                color: Theme.highlightColor
+//            }
 
-            Label {
-                width: parent.width
-                text: qsTr("Restart your keyboard to activate this extension. If <i>Sailfish Utilities</i> are installed, go to <b>Settings</b> / <b>Utilities</b> / <b>Restart keyboard</b>, otherwise just restart your phone.")
-                wrapMode: Text.Wrap
-            }
+//            Label {
+//                width: parent.width
+//                text: qsTr("Restart your keyboard to activate this extension. If <i>Sailfish Utilities</i> are installed, go to <b>Settings</b> / <b>Utilities</b> / <b>Restart keyboard</b>, otherwise just restart your phone.")
+//                wrapMode: Text.Wrap
+//            }
 
             Separator {
                 id: seperator

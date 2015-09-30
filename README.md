@@ -8,9 +8,11 @@ If features a DBus service to enable applications to insert any text into a
 currently focused widget on the phone screen.
 
 
-## Changelog   
+## Changelog
+
 - See [Changelog](https://github.com/abertschi/sailfish-headless-keyboard-dbus/blob/master/installation-app/rpm/headless-keyboard.changes.in)
-- 
+
+
 ## Installation
 - See [Release Section](https://github.com/abertschi/sailfish-headless-keyboard-dbus/releases)
 

@@ -16,7 +16,63 @@ currently focused widget on the phone screen.
 ## Installation
 - See [Release Section](https://github.com/abertschi/sailfish-headless-keyboard-dbus/releases)
 
+## API
+- Bus service: ch.abertschi.keyboard.headless
+- Bus type: Session Bus
+- Bus if_name: ch.abertschi.keyboard.headless.Server
+- Bus path: /
 
+## Signals
+
+### send_text
+Insert text at cursor position.
+
+- in_signature: s
+- out_signature: -
+
+### send_key_return
+Enter a newline.
+
+- in_signature: -
+- out_signature: -
+
+### send_key_del
+Remove a character at cursor position.
+
+- in_signature: -
+- out_signature: -
+
+### send_key_arrow
+Change cursor.
+
+- in_signature: s
+  - ['up', 'down', 'right', 'left']
+
+- out_signature: -
+
+
+### exit
+Kill the service 
+
+- in_signature: -
+- out_signature: -
+
+### send_enable_debug
+Enable debug mode
+
+- in_signature: b
+  - True if enable
+- out_signature: -
+
+## Slots
+
+### receive_clipboard_changed
+Clipboard was changed
+
+- in_signature: s
+- out_signature: -
+
+  
 ## Projects that use headless-keybard
 - [sailfish-wlan-keyboard](https://github.com/abertschi/sailfish-wlan-keyboard):
  Use your computer keyboard to type on your phone.

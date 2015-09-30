@@ -9,7 +9,6 @@ OTHER_FILES += qml/headless-keyboard.qml \
     qml/About.qml \
     rpm/headless-keyboard.changes.in \
     rpm/headless-keyboard.spec \
-    rpm/headless-keyboard.yaml \
     translations/*.ts \
     headless-keyboard.big.png \
     headless-keyboard.desktop \

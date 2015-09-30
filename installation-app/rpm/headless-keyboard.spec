@@ -13,13 +13,12 @@ Name:       headless-keyboard
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Setup app for headless-keyboard layout
-Version:    0.3
+Version:    0.3.1
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
-Source100:  headless-keyboard.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   pygobject2
 Requires:   dbus-python
